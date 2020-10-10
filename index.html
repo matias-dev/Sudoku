@@ -4,78 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <title>Sudoku</title>
 </head>
 <body>
 
-    <style>
-        body { font-family: 'Lato'; font-size: x-large;}
-        table { border-collapse: collapse}
-        colgroup, tbody { border: solid medium #161a1d; }
-        td { border: solid thin #353535; height: 1.4em; width: 1.4em; text-align: center; padding: 0; }
-    </style>
+    <main>
+    
+        <h1> Sudoku </h1>
 
-    <table style="margin: 25px">
-        <caption style="margin-bottom: 25px;">RPAN Sudoku</caption>
-        <colgroup><col><col><col></colgroup>
+        <h2> use the format <span>1A : 1</span></h2>
+
+        <table class="top">
+            <colgroup><col><col><col></colgroup>
+            <colgroup><col><col><col></colgroup>
+            <tr>  <td>1 <td>2  <td>3  <td>4  <td>5  <td>6  <td>7  <td>8  <td>9
+        </table>
+
+        <table class="left">
+            <colgroup><col><col><col></colgroup>
+            <colgroup><col><col><col></colgroup>
+            <tr>  <td>A <td>B  <td>C  <td>D  <td>E  <td>F  <td>G  <td>H  <td>I
+        </table>
+
+        <table id="grid">
         <colgroup><col><col><col></colgroup>
         <colgroup><col><col><col></colgroup>
         <tbody>
-            <tr> <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-            <tr> <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-            <tr> <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
         <tbody>
-            <tr> <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-            <tr> <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-            <tr> <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
         <tbody>
-            <tr> <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-            <tr> <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-            <tr> <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-      </table>
+            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+        </table>
 
-      <script>
+        <h2 id="text" style="margin-top: 35px;"> u/porvos: hola</h2>
 
-        let table = document.querySelector("table");
-        console.log(table);
-
-        function getCellData(x,y){
-
-            let rowGroup = x <= 3 ? 0 : x <= 6 ? 1 : 2;
-            let colGroup = y <= 3 ? 0 : y <= 6 ? 1 : 2;
-
-            let tableRow = table.querySelectorAll("tbody")[rowGroup];
-
-            let offset = colGroup * 3;
-
-            let row = tableRow.querySelectorAll("tr")[ (x - offset) - 1 ];
-
-            let cell = row.querySelectorAll("td")[y-1];
-
-            function getCol(y){
-                let cells = document.querySelectorAll("td");
-
-                let row = [];
-
-                for ( let i = 0; i < 9; i++){
-                    row.push(cells[i*9+y]);    
-                }
-
-                return row
-            }
-
-            return {
-                cell:cell,
-                rowGroup:rowGroup,
-                colGroup:colGroup,
-                row:Array.from(row.children),
-                col:getCol(y),
-                };
-        }
-
-        console.log(getCellData(7,7));
-
-      </script>
-
+    <script src="script.js"></script>
+    
+        
 </body>
 </html>

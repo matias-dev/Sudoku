@@ -1,0 +1,30 @@
+{
+    "name": "RPAN comments",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "RPAN comments listener",
+    "author": "Matias Nicolas Veron",
+    "permissions": [
+        "tabs",
+        "http://localhost/*"
+    ],
+    "browser_action": {
+        "default_icon": "script.png"
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": true
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ]
+}

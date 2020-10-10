@@ -1,0 +1,37 @@
+body { font-family: 'Lato'; font-size: x-large;}
+main { width: 500px;}
+table { border-collapse: collapse; margin: auto;}
+
+h1 {text-align: center; margin-bottom: 10px;}
+h2 {text-align: center; font-size: smaller; margin: 5px;}
+span { font-family:"Roboto Slab" ;}
+
+colgroup, tbody { border: solid medium #161a1d; }
+td { border: solid thin #353535; height: 1.4em; width: 1.4em; text-align: center; padding: 0; transition: 1s; font-weight: bold}
+td.grey{ background: #d9d9d9; font-weight: normal;}
+
+.top colgroup{ border-color: #d9d9d9;}
+.left colgroup{ border-color: #d9d9d9;}
+
+.top td { border-color: #fff;}
+.left td { border-color: #fff;}
+
+.top tbody{ border-style: hidden;}
+.left tbody{ border-style: hidden;}
+
+.left{ transform: scaleY(0.97) rotate(90deg) ;}
+.left tr td{transform: rotate(-90deg);}
+
+.top {
+    position: relative;
+    top: 30px;}
+.left {
+    position: relative;
+    top: 176px;
+    left: -185px;
+}
+
+.top,.left{
+    color: #353535;
+    font-family: "Roboto Slab";
+}
