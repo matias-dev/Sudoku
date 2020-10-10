@@ -39,7 +39,7 @@ function observer(port) {
 
         if (user && text) {
 
-            if (comment.user != user || comment.text != text || date.getTime() - initialDate.getTime() > comment.time + 10000) {
+            if (comment.user != user || comment.text != text || date.getTime() - initialDate.getTime() > comment.time + 50000) {
                 comment = { user: user, text: text, time: date.getTime() - initialDate.getTime() };
                 port.postMessage(comment);
                 console.log(comment);

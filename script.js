@@ -66,7 +66,7 @@ function getCellData(x, y) {
 }
 
 function setValue(x, y, value) {
-    
+
     if (grid[x][y].editable) {
 
         let oldValue = grid[x][y].value;
@@ -103,14 +103,11 @@ function setValue(x, y, value) {
 
 }
 
-function isItBroken(x, y) {
-    let arr = Array.from(new Set(grid[x][y].imp));
-    return arr.length == 9
-}
-
 /// GENERATE GAME ///
 
-function generate() {
+generate();
+
+function generate(difficult="easy") {
 
     for (let i = 1; i <= 9; i++) {
         grid[i] = [null]; // para mantener el criterio de numeracion
@@ -120,45 +117,25 @@ function generate() {
         }
     }
 
-    let cellsArray = Array.from(Array(81).keys());
+    fetch('https://sugoku.herokuapp.com/board?difficulty=' + difficult)
+        .then(response => response.json())
+        .then(data => fillBoard(data.board));
 
-    for (let i = 0; i < 25; i++) {
+    function fillBoard(data) {
 
-        let n = cellsArray[Math.floor(Math.random() * cellsArray.length)];
-
-        let x = Math.floor(n / 9) + 1;
-        let y = n - Math.floor(n / 9) * 9 + 1;
-
-        do {
-            let value = Math.floor(Math.random() * 9) + 1;
-            setValue(x, y, value);
-        } while (!grid[x][y].condition)
-
-        if (check()) {
-            cellsArray.splice(cellsArray.indexOf(n), 1);
-            grid[x][y].cell.classList.add("grey")
-            grid[x][y].editable = false;
-        } else {
-            setValue(x, y, null);
-        }
-
-    }
-
-    function check() {
-        let ans = true;
         for (let i = 1; i <= 9; i++) {
             for (let j = 1; j <= 9; j++) {
-                if (isItBroken(i, j) && grid[i][j].value == null) {
-                    ans = false;
+                let value = data[i - 1][j - 1];
+                if (value != 0){
+                    setValue(i, j, data[i - 1][j - 1]);
+                    grid[i][j].cell.classList.add("grey");
+                    grid[i][j].editable = false;
                 }
             }
         }
-        return ans;
     }
 
 }
-
-generate();
 
 // text //
 
@@ -166,24 +143,24 @@ let canWrite = true;
 
 function write(user, text) {
 
-    function isAnswer(text){
-        if(text.length != 4) { return false }
-        if(!text[0].match(/[0-9]/i)){return false}
-        if(!text[1].match(/[a-z]/i)){return false}
-        if(text[2] != ":") { return false }
-        if(!text[3].match(/[0-9]/i)){return false}
+    function isAnswer(text) {
+        if (text.length != 4) { return false }
+        if (!text[0].match(/[0-9]/i)) { return false }
+        if (!text[1].match(/[a-z]/i)) { return false }
+        if (text[2] != ":") { return false }
+        if (!text[3].match(/[0-9]/i)) { return false }
         return true;
     }
 
-    if(isAnswer(text)){
-        let Arr = ["A","B","C","D","E","F","G","H","I"];
+    if (isAnswer(text)) {
+        let Arr = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
         let num = Arr.indexOf(text[1].toUpperCase()) + 1;
-        setValue(text[0],num,text[3]);
+        setValue(text[0], num, text[3]);
         return
     }
 
     if (canWrite) {
-        if (text.length >= 25) { text = text.slice(0,25) + "..."}
+        if (text.length >= 25) { text = text.slice(0, 25) + "..." }
         canWrite = false;
         typeDeletter();
     }
@@ -215,6 +192,6 @@ function write(user, text) {
 
 document.addEventListener("onComment",
     (event) => {
-        write("u/"+event.detail.user,event.detail.text)
+        write("u/" + event.detail.user, event.detail.text)
     }
 )
