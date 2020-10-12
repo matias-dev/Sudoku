@@ -1,8 +1,6 @@
-
-
-let table = document.querySelector("#grid");
-
 let grid = [];
+
+let selected = null;
 
 class cell {
 
@@ -44,13 +42,15 @@ class cell {
             }
         }
 
-        let color = this.condition ? "color:black" : "color:#e26d5c";
+        let color = this.condition ? "color:black" : "color:#ff2300";
         this.cell.setAttribute("style", color);
     }
 
 }
 
 function getCellData(x, y) {
+
+    let table = document.querySelector("#grid");
 
     let rowGroup = y <= 3 ? 0 : y <= 6 ? 1 : 2;
 
@@ -107,7 +107,7 @@ function setValue(x, y, value) {
 
 generate();
 
-function generate(difficult="easy") {
+function generate(difficult = "easy") {
 
     for (let i = 1; i <= 9; i++) {
         grid[i] = [null]; // para mantener el criterio de numeracion
@@ -126,22 +126,104 @@ function generate(difficult="easy") {
         for (let i = 1; i <= 9; i++) {
             for (let j = 1; j <= 9; j++) {
                 let value = data[i - 1][j - 1];
-                if (value != 0){
+                if (value != 0) {
                     setValue(i, j, data[i - 1][j - 1]);
                     grid[i][j].cell.classList.add("grey");
                     grid[i][j].editable = false;
                 }
+                grid[i][j].cell.addEventListener("click", () => { onSelect(grid[i][j]); });
             }
         }
     }
 
+    let buttons = document.querySelectorAll("#buttons td");
+
+    buttons.forEach(
+        (el) => {
+            el.addEventListener("click",
+                () => {
+                    if (selected) {
+                        setValue(selected.x, selected.y, parseInt(el.innerText))
+                    }
+                })
+        });
+
+    document.querySelector(".borrar").addEventListener("click",()=>{setValue(selected.x,selected.y,null)})
+
 }
+
+// // //
+
+function onSelect(sel) {
+    if (selected) { 
+        selected.cell.classList.remove("sel");
+        propagate(selected.x,selected.y,false); 
+    }
+
+    selected = (selected == sel) ? null : sel;
+
+    if (selected) {
+        propagate(selected.x,selected.y,true);
+        selected.cell.classList.add("sel");
+    }
+
+}
+
+function propagate(x, y, add) {
+
+    let rowGroup = y <= 3 ? 0 : y <= 6 ? 1 : 2;
+    let colGroup = x <= 3 ? 0 : x <= 6 ? 1 : 2;
+
+    let arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+
+    // propagate row and col //
+    arr.map(group => {
+        if (group != arr[rowGroup]) {
+            for (let i = 0; i < 3; i++) {
+                if (add) {
+                    grid[x][group[i]].cell.classList.add("selected");
+                } else {
+                    grid[x][group[i]].cell.classList.remove("selected");
+                }
+            }
+        }
+    })
+
+    arr.map(group => {
+        if (group != arr[colGroup]) {
+            for (let i = 0; i < 3; i++) {
+                if (add) {
+                    grid[group[i]][y].cell.classList.add("selected");
+                } else{
+                    grid[group[i]][y].cell.classList.remove("selected");
+                }
+            }
+        }
+    })
+
+    // propagate block //
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (add) {
+                grid[arr[colGroup][j]][arr[rowGroup][i]].cell.classList.add("selected");
+            } else {
+                grid[arr[colGroup][j]][arr[rowGroup][i]].cell.classList.remove("selected");
+            }
+        }
+    }
+}
+
+// event // TO BE USED WITH THE EXTENSION I'VE MADE
+
+document.addEventListener("onComment",
+    (event) => {
+        write(event.detail.text);
+    }
+)
 
 // text //
 
-let canWrite = true;
-
-function write(user, text) {
+function write(text) {
 
     function isAnswer(text) {
         if (text.length != 4) { return false }
@@ -158,40 +240,5 @@ function write(user, text) {
         setValue(text[0], num, text[3]);
         return
     }
-
-    if (canWrite) {
-        if (text.length >= 25) { text = text.slice(0, 25) + "..." }
-        canWrite = false;
-        typeDeletter();
-    }
-
-    function typeDeletter() {
-        let el = document.querySelector("#text");
-        if (el.innerText.length > 0) {
-            el.innerText = el.innerText.slice(1);
-            setTimeout(typeDeletter, 80);
-        } else {
-            setTimeout(function () { typeWritter(user, text) }, 100);
-        }
-    }
-
-    function typeWritter(user, text, step = 0) {
-        let el = document.querySelector("#text");
-
-        let newText = user + ": " + text;
-
-        if (step < newText.length) {
-            el.innerHTML += newText.charAt(step);
-            setTimeout(function () { typeWritter(user, text, step + 1) }, 75);
-        } else (canWrite = true);
-    }
-
 }
 
-// event //
-
-document.addEventListener("onComment",
-    (event) => {
-        write("u/" + event.detail.user, event.detail.text)
-    }
-)

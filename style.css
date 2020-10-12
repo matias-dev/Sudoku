@@ -1,14 +1,79 @@
-body { font-family: 'Lato'; font-size: x-large;}
-main { width: 450px;}
+body { font-family: 'Lato'; font-size: x-large; margin: 0;}
 table { border-collapse: collapse; margin: auto;}
 
-h1 {text-align: center; margin-bottom: 10px;}
-h2 {text-align: center; font-size: smaller; margin: 5px;}
-span { font-family:"Roboto Slab" ;}
+header{margin-bottom: 15px; box-shadow: 0 5px 5px 0px #00000045; background: steelblue;}
+
+h1 {text-align: center; margin: 0; padding: 17px; color:#fff}
+
+main{display:flex; justify-content: center  ;}
+section{margin: 25px;}
+
+.btn{
+    width: 100%; 
+    padding: 10px 15px; 
+    border: none;
+    font-weight: bold;
+    border-radius: 4px;
+    outline:none;
+    transition: 0.2s;
+}
+
+.newGame{ 
+    background: steelblue;
+    color:#fff;
+    
+}
+
+.newGame:hover{ background: #6299c7;}
+
+.newGame:active{background: steelblue;}
+
+.borrar{ 
+    background: rgb(103, 146, 180);
+    color:#fff;
+}
+
+.borrar:hover{ background: #6299c7;}
+
+.borrar:active{background: steelblue;}
+
+
+
+#panel{align-self: center;}
+
+#buttons{ font-size: 26px;}
+
+#buttons td { padding: 8px;}
+
+
+#buttons td:active { background:#85b8e2;}
+
+#exGrid { margin-top: 10px;}
+
+#exGrid td { padding: 5px;}
+
+#buttons td:hover { background: #ecf0ff;}
+
+#grid td:hover, #grid td.selected { background: #ecf0ff;}
+
+#grid td.grey:hover { background: #ecf0ff; }
+
+#grid td,#buttons td{ cursor: pointer;}
 
 colgroup, tbody { border: solid medium #161a1d; }
-td { border: solid thin #353535; height: 1.4em; width: 1.4em; text-align: center; padding: 0; transition: 1s; font-weight: bold}
-td.grey{ background: #d9d9d9; font-weight: normal;}
+
+td { 
+    border: solid thin #353535; 
+    height: 1.4em; 
+    width: 1.4em; 
+    text-align: center; 
+    padding: 0; 
+    transition: 0.5s
+}
+
+td.grey{ font-weight: bold;}
+
+td.sel{ background: #d5ddfb;}
 
 .top colgroup{ border-color: #d9d9d9;}
 .left colgroup{ border-color: #d9d9d9;}
@@ -27,11 +92,12 @@ td.grey{ background: #d9d9d9; font-weight: normal;}
     top: 30px;}
 .left {
     position: relative;
-    top: 176px;
-    left: -185px;
+    top: 225px;
+    left: -240px;
 }
 
 .top,.left{
-    color: #353535;
+    color: #96a3cc;
     font-family: "Roboto Slab";
+    font-weight: bold;
 }

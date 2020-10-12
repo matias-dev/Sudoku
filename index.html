@@ -10,45 +10,73 @@
 </head>
 <body>
 
-    <main>
-    
+    <header>
         <h1> Sudoku </h1>
+    </header>
+    
 
-        <h2> use the format <span>1A : 1</span></h2>
+    <main>
 
-        <table class="top">
+        <section id="exGrid">
+            
+            <table class="top">
+                <colgroup><col><col><col></colgroup>
+                <colgroup><col><col><col></colgroup>
+                <tr>  <td>1 <td>2  <td>3  <td>4  <td>5  <td>6  <td>7  <td>8  <td>9
+            </table>
+
+            <table class="left">
+                <colgroup><col><col><col></colgroup>
+                <colgroup><col><col><col></colgroup>
+                <tr>  <td>A <td>B  <td>C  <td>D  <td>E  <td>F  <td>G  <td>H  <td>I
+            </table>
+
+            <table id="grid">
             <colgroup><col><col><col></colgroup>
             <colgroup><col><col><col></colgroup>
-            <tr>  <td>1 <td>2  <td>3  <td>4  <td>5  <td>6  <td>7  <td>8  <td>9
-        </table>
+            <tbody>
+                <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+                <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+                <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+            <tbody>
+                <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+                <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+                <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+            <tbody>
+                <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+                <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+                <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+            </table>
 
-        <table class="left">
-            <colgroup><col><col><col></colgroup>
-            <colgroup><col><col><col></colgroup>
-            <tr>  <td>A <td>B  <td>C  <td>D  <td>E  <td>F  <td>G  <td>H  <td>I
-        </table>
+        </section>
 
-        <table id="grid">
-        <colgroup><col><col><col></colgroup>
-        <colgroup><col><col><col></colgroup>
-        <tbody>
-            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-        <tbody>
-            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-        <tbody>
-            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-            <tr>  <td> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-        </table>
+        <section id="panel">
 
+            <button class="btn newGame"> NUEVO JUEGO </button>
+
+            <hr style="margin-top: 45px; margin-bottom: 45px;">
+
+            <table id="buttons">
+                <tr> <td>1<td>2<td>3
+                <tr> <td>4<td>5<td>6
+                <tr> <td>7<td>8<td>9
+            </table>
+
+            <button class="btn borrar"> BORRAR </button>
+
+
+        </section>
+
+        
+    </main>
+
+     <!--
         <h2 id="text" style="margin-top: 35px;"> </h2>
-
+        -->
+    
     <script src="script.js"></script>
     
+   
 
 </body>
 </html>
