@@ -29,6 +29,7 @@ section{margin: 25px;}
 .newGame:active{background: steelblue;}
 
 .borrar{ 
+    margin-top: 5px;
     background: rgb(103, 146, 180);
     color:#fff;
 }

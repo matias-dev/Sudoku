@@ -147,23 +147,42 @@ function generate(difficult = "easy") {
                     }
                 })
         });
-
-    document.querySelector(".borrar").addEventListener("click",()=>{setValue(selected.x,selected.y,null)})
-
 }
+
+// //
+
+document.querySelector(".newGame").addEventListener("click",
+    () => {
+        onSelect(selected);
+        let grd = document.querySelectorAll("#grid td");
+        for (let el of grd) { 
+            el.classList.remove("grey");
+            el.innerText = null 
+        }
+        grid = [];
+
+        generate();
+    }
+);
+
+document.querySelector(".borrar").addEventListener("click",
+    () => {
+        setValue(selected.x, selected.y, null)
+    }
+);
 
 // // //
 
 function onSelect(sel) {
-    if (selected) { 
+    if (selected) {
         selected.cell.classList.remove("sel");
-        propagate(selected.x,selected.y,false); 
+        propagate(selected.x, selected.y, false);
     }
 
     selected = (selected == sel) ? null : sel;
 
     if (selected) {
-        propagate(selected.x,selected.y,true);
+        propagate(selected.x, selected.y, true);
         selected.cell.classList.add("sel");
     }
 
@@ -194,7 +213,7 @@ function propagate(x, y, add) {
             for (let i = 0; i < 3; i++) {
                 if (add) {
                     grid[group[i]][y].cell.classList.add("selected");
-                } else{
+                } else {
                     grid[group[i]][y].cell.classList.remove("selected");
                 }
             }
